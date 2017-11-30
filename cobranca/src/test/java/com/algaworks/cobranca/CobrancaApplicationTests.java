@@ -1,4 +1,4 @@
-package com.example.cobranca;
+package com.algaworks.cobranca;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

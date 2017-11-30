@@ -1,4 +1,4 @@
-package com.example.cobranca;
+package com.algaworks.cobranca;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
