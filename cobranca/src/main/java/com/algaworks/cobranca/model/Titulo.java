@@ -1,5 +1,6 @@
 package com.algaworks.cobranca.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+
 @Entity
 public class Titulo {
 	
@@ -20,8 +24,12 @@ public class Titulo {
 	
 	private String descricao;
 	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
+	
+	@NumberFormat(pattern="#,##0.00")
+	private BigDecimal valor;
 	
 	@Enumerated(EnumType.STRING)
 	private StatusTitulo status;
@@ -44,11 +52,17 @@ public class Titulo {
 	public void setDataVencimento(Date dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
-	public StatusTitulo getStatusTitulo() {
+	public BigDecimal getValor() {
+		return valor;
+	}
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+	public StatusTitulo getStatus() {
 		return status;
 	}
-	public void setStatusTitulo(StatusTitulo statusTitulo) {
-		this.status = statusTitulo;
+	public void setStatus(StatusTitulo status) {
+		this.status = status;
 	}
 	@Override
 	public int hashCode() {
