@@ -1,4 +1,16 @@
+/*Tela grande*/
+
 .navbar-brand
 {
 	padding-top: 12px;
+}
+
+.aw-link-panel
+{
+	float: right;
+}
+
+.aw-title-panel
+{
+	float: left;
 }

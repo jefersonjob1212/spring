@@ -11,7 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -22,12 +27,18 @@ public class Titulo {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long codigo;
 	
+	@Size(max=60, message="Descrição não pode ser maior que 60 caracteres")
+	@NotEmpty(message="Campo Descrição é Obrigatório")
 	private String descricao;
 	
+	@NotNull(message="Campo Data Vencimento é Obrigatório")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
 	
+	@NotNull(message="Campo Valor é Obrigatório")
+	@DecimalMin(value="0.01", message="Valor não pode ser menor que R$ 0,01")
+	@DecimalMax(value="9999999.99", message="Valor não pode ser maior que R$ 9.999.999,99")
 	@NumberFormat(pattern="#,##0.00")
 	private BigDecimal valor;
 	
@@ -86,5 +97,10 @@ public class Titulo {
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+	
+	public boolean isPendente()
+	{
+		return StatusTitulo.PENDENTE.equals(this.status);
 	}
 }
